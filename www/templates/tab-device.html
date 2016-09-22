@@ -1,0 +1,13 @@
+<ion-view view-title="Device">
+  <ion-content>
+    <ion-list id="device-list1" class="manual-list-fullwidth" ng-repeat="device in devices track by device.id">
+            <ion-item class="item-thumbnail-left item-icon-right" id="device-list-item1" ui-sref="#/tab/device/{{device.id}}">
+                <img src="img/LT9LhmGRSdaP8A5TQiTX_11310763-touch-pad.jpg">
+                <h2>{{device.username}}</h2>
+                <p>Registered on {{device.createDate}}</p>
+                <i class="icon ion-android-arrow-dropright icon-accessory"></i>
+            </ion-item>
+    </ion-list>
+        <a ui-sref="tabsController.addNewDevice" id="device-button4" class="button button-positive  button-block">Add new device</a>
+  </ion-content>
+</ion-view>
