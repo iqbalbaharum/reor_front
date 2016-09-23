@@ -93,15 +93,13 @@ angular.module('starter.services', [])
 
   var addMessage = function(msg){
     msg.notification = msg.notification || false;
+    
     messages.push(msg);
-
-    analyzeMsg(msg);
-
 
     scrollBottom();
   };
 
-  var analyzeMsg = function(msg){
+  /*var analyzeMsg = function(msg){
       //alert("hello");
       var newmsg = msg.split("<");
 
@@ -112,7 +110,7 @@ angular.module('starter.services', [])
           //console.log(newmsg[0]);
          // addMessage("try");
 
-        var respond = "Location: Mid Valley\n";
+        var respond = "Location: Mid Valley ";
         respond = respond + " Availability: 27%"
 
          return respond;
@@ -122,28 +120,7 @@ angular.module('starter.services', [])
         return respond;
       }
       
-
-
-
-      /*for (var i=0; i<newmsg.length;i++){
-        
-        if((newmsg[i].indexOf('<') > -1) && (newmsg[i].indexOf('>') > -1)){
-            console.log("true");
-        }
-        
-      }*/
-
-      //console.log(newmsg[0]);
-
-      //var n = msg.indexOf("<");
-      //var j = msg.indexOf(">");
-
-      //var newmsg = msg.substr(n+1,(j-n))
-      
-      /*for (var i=0; i<newmsg.length;i++){
-        console.log(newmsg[i]);
-      }*/
-  }
+  }*/
 
   var removeTypingMessage = function(usr){
     for (var i = messages.length - 1; i >= 0; i--) {
@@ -172,16 +149,14 @@ angular.module('starter.services', [])
       });
       scrollBottom();
 
-     var myMsg = analyzeMsg(msg);
+     /*var myMsg = analyzeMsg(msg);
 
      if (myMsg != ""){
-        //console.log(myMsg); 
-        //myMsg = ;
         messages.push({
         username: username,
         message: myMsg
       });
-     }
+     }*/
 
       //var checkMsg = analyzeMsg(msg);
 

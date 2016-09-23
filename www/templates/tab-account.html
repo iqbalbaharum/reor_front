@@ -1,9 +1,15 @@
-<ion-view view-title="Account">
-  <ion-content>
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
-  </ion-content>
+<ion-view view-title="Profile">
+  <ion-content padding="true" class="has-header">
+        <form id="profile-form5" class="list">
+            <label class="item item-input" id="profile-input6">
+                <span class="input-label">Name</span>
+                <input type="text" placeholder="" value="Ferdy">
+            </label>
+            <label class="item item-input item-stacked-label" id="profile-input7">
+                <span class="input-label">Email address</span>
+                <input type="text" placeholder="" value="ferdy@reor.com">
+            </label>
+        </form>
+        <button id="profile-button5" class="button button-positive  button-block">Change profile</button>
+    </ion-content>
 </ion-view>

@@ -101,6 +101,16 @@ angular.module('starter', ['ionic', 'btford.socket-io', 'starter.controllers', '
     }
   })
 
+    .state('tab.deviceAdd', {
+    url: '/device/',
+    views: {
+      'tab-device': {
+        templateUrl: 'templates/deviceAdd.html',
+        controller: 'DeviceAddCtrl'
+      }
+    }
+  })
+
   .state('tab.account', {
     url: '/account',
     views: {

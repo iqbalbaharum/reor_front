@@ -118,9 +118,49 @@ angular.module('starter.controllers', [])
   };
 
   $scope.sendMessage = function(msg){
+
     Chat.sendMessage(msg);
+
+    var newmsg = analyzeMsg(msg);
+
+    if (newmsg != ""){
+      Chat.sendMessage(newmsg);
+    }
+
+
     $scope.data.message = "";
   };
+
+  
+  var analyzeMsg = function(msg){
+      //alert("hello");
+      var newmsg = msg.split("<");
+
+      if(newmsg[1] != undefined){
+        //console.log(newmsg[1]);
+        newmsg = newmsg[1].split(">");
+        if (newmsg[0] != undefined){
+          //console.log(newmsg[0]);
+         // addMessage("try");
+        var myLocation = "Mid Valley";
+        var parking = "27%";
+        var traffic = "High";
+        
+        var respond = "Location: " + myLocation;
+
+        respond = respond + " | Parking Availability: " + parking;
+        respond = respond + " | Traffic: " + traffic;
+
+         return respond;
+        }
+      } else{
+        var respond = "";
+        return respond;
+      }
+      
+  }
+
+
 
 
   
@@ -142,6 +182,11 @@ angular.module('starter.controllers', [])
  $scope.device = $scope.devices.filter(function(device){
     return device.id == $stateParams.id;
   }).pop();
+
+})
+
+.controller('DeviceAddCtrl', function($scope) {
+
 
 })
 
