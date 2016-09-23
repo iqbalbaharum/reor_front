@@ -220,6 +220,8 @@ angular.module('starter.controllers', [])
 
          return parameter + ",tag";
         }
+      } else if (newmsg2[1] != undefined){
+          
       } else{
         var respond = "";
         return respond;
