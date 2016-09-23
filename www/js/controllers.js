@@ -34,7 +34,7 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, $stateParams, $ionicPopup, $timeout, Socket, Chat) {
+.controller('ChatsCtrl', function($scope, $stateParams, $ionicPopup, $timeout, Socket, Chat, $http) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -135,6 +135,7 @@ angular.module('starter.controllers', [])
   var analyzeMsg = function(msg){
       //alert("hello");
       var newmsg = msg.split("<");
+      var newmsg2 = msg.split("@");
 
       if(newmsg[1] != undefined){
         //console.log(newmsg[1]);
@@ -142,10 +143,47 @@ angular.module('starter.controllers', [])
         if (newmsg[0] != undefined){
           //console.log(newmsg[0]);
          // addMessage("try");
-        var myLocation = "Mid Valley";
+
+         //$scope.data = {};
+
+         var headers = {
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        };
+
+        var url = "http://appsmalaya.com/melaka/output.php"
+
+        //'http://default-environment.bnksf6bnuf.ap-southeast-1.elasticbeanstalk.com/reor_back/api/request.php?location=KLCC'
+
+        $http({
+            method: 'GET',
+            headers: headers,
+            url: url
+          }).then(function successCallback(response) {
+              // this callback will be called asynchronously
+              // when the response is available
+
+              console.log(response.data);
+
+            }, function errorCallback(response) {
+              // called asynchronously if an error occurs
+              // or server returns response with an error status.
+        });
+
+        /*$http.get("http://default-environment.bnksf6bnuf.ap-southeast-1.elasticbeanstalk.com/reor_back/api/request.php?location=KLCC").then(function(response){
+            
+            $scope.data = response.data;
+            console.log($scope.data);
+            
+        });*/ //end of http get
+
+
+        var myLocation = newmsg[0];
         var parking = "27%";
         var traffic = "High";
-        
+
         var respond = "Location: " + myLocation;
 
         respond = respond + " | Parking Availability: " + parking;
