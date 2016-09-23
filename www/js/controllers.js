@@ -124,7 +124,56 @@ angular.module('starter.controllers', [])
     var newmsg = analyzeMsg(msg);
 
     if (newmsg != ""){
-      Chat.sendMessage(newmsg);
+      newmsg2 = newmsg.split(",");
+        
+        if (newmsg2[1]=="tag"){
+            console.log(newmsg2[0])
+        
+        //start
+        var headers = {
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        };
+           
+        
+         var url = 'http://default-environment.bnksf6bnuf.ap-southeast-1.elasticbeanstalk.com/reor_back/api/request.php?location=' + newmsg2[0];
+
+        $http({
+            method: 'GET',
+            headers: headers,
+            url: url
+          }).then(function successCallback(response) {
+              // this callback will be called asynchronously
+              // when the response is available
+
+              console.log(response.data);
+            
+            var myLocation = newmsg.replace("%20", " ");
+            myLocation = myLocation.replace(",tag","");
+            myLocation = myLocation.replace(",device","");
+            var parking = response.data["Parking"];
+            var traffic = response.data["Traffic"];
+            var crowd = response.data["crowd"];
+
+            var respond = "Location: " + myLocation;
+
+            respond = respond + " | Parking Availability: " + parking;
+            respond = respond + " | Traffic: " + traffic + " | Crowd: " + crowd;
+
+             Chat.sendMessage(respond);
+
+            }, function errorCallback(response) {
+              // called asynchronously if an error occurs
+              // or server returns response with an error status.
+        });
+        
+        } //end if
+        else if(newmsg2[1]=="device"){
+            
+        }
+        //finish 
     }
 
 
@@ -146,31 +195,11 @@ angular.module('starter.controllers', [])
 
          //$scope.data = {};
 
-         var headers = {
-          'Access-Control-Allow-Origin' : '*',
-          'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT',
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        };
+          
+        var parameter = newmsg[0].replace(" ", "%20");
+        //var url = "http://appsmalaya.com/melaka/output.php"
 
-        var url = "http://appsmalaya.com/melaka/output.php"
-
-        //'http://default-environment.bnksf6bnuf.ap-southeast-1.elasticbeanstalk.com/reor_back/api/request.php?location=KLCC'
-
-        $http({
-            method: 'GET',
-            headers: headers,
-            url: url
-          }).then(function successCallback(response) {
-              // this callback will be called asynchronously
-              // when the response is available
-
-              console.log(response.data);
-
-            }, function errorCallback(response) {
-              // called asynchronously if an error occurs
-              // or server returns response with an error status.
-        });
+        
 
         /*$http.get("http://default-environment.bnksf6bnuf.ap-southeast-1.elasticbeanstalk.com/reor_back/api/request.php?location=KLCC").then(function(response){
             
@@ -180,16 +209,16 @@ angular.module('starter.controllers', [])
         });*/ //end of http get
 
 
-        var myLocation = newmsg[0];
+        /*var myLocation = newmsg[0];
         var parking = "27%";
         var traffic = "High";
 
         var respond = "Location: " + myLocation;
 
         respond = respond + " | Parking Availability: " + parking;
-        respond = respond + " | Traffic: " + traffic;
+        respond = respond + " | Traffic: " + traffic;*/
 
-         return respond;
+         return parameter + ",tag";
         }
       } else{
         var respond = "";
